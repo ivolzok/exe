@@ -1,5 +1,4 @@
 import struct
-
 class OptionHeader:
     def __init__(
             self,
@@ -62,3 +61,23 @@ class OptionHeader:
         self.size_of_heap_commit = size_of_heap_commit
         self.loader_flags = loader_flags
         self.number_of_rva_and_sizes = number_of_rva_and_sizes
+
+class OptionHeader32(OptionHeader):
+    def __init__(self, base_of_data, *args):
+        self.base_of_data = base_of_data
+        super().__init__(*args)
+
+    @classmethod
+    def from_bytes(cls, data):
+        fields = list(struct.unpack('<BBIIIIIIIIIHHHHHHIIIIHHIIIIII', data))
+        base_of_data = fields.pop(7)
+        return OptionHeader32(267,base_of_data, *fields)
+
+class OptionHeader64(OptionHeader):
+    def __init__(self, *args):
+        super().__init__(*args)
+
+    @classmethod
+    def from_bytes(cls, data):
+        fields = list(struct.unpack('<BBIIIIIQIIHHHHHHIIIIHHQQQQII', data))
+        return OptionHeader64(523, *fields)
