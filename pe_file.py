@@ -43,7 +43,5 @@ class PEFile:
         return PEFile(signature, file_header, optional_header, data_directory, sections)
 
     def __str__(self):
-        parts = []
-        parts.append(str(self.file_header))
-        parts.append(str(self.option_header))
+        parts = [str(self.file_header), str(self.option_header), str(self.data_directory)]
         return '\n\n'.join(parts)
