@@ -7,7 +7,7 @@ from section import Section
 
 class PEFile:
     def __init__(self, signature, file_header: FileHeader,
-                 option_header: OptionHeader, data_directory: DataDirectory, sections: dict[str,Section]):
+                 option_header: OptionHeader, data_directory: DataDirectory, sections: dict[str, Section]):
         self.signature = signature
         self.file_header = file_header
         self.option_header = option_header
@@ -44,4 +44,6 @@ class PEFile:
 
     def __str__(self):
         parts = [str(self.file_header), str(self.option_header), str(self.data_directory)]
+        for section in self.sections.values():
+            parts.append(str(section))
         return '\n\n'.join(parts)

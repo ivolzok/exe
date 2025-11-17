@@ -8,6 +8,7 @@ class DataDirectory:
         "Global Ptr", "TLS", "Load Config", "Bound Import",
         "IAT", "Delay Import", "CLR", "Reserved"
     ]
+
     def __init__(self):
         self.table = []
 
@@ -21,7 +22,7 @@ class DataDirectory:
     def from_bytes(cls, data):
         directory = DataDirectory()
         for i in range(0, len(data), 8):
-            virtual_address, size = struct.unpack('<II', data[i:i+8])
+            virtual_address, size = struct.unpack('<II', data[i:i + 8])
             directory.add_row(virtual_address, size)
         return directory
 

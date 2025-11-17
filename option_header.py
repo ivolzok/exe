@@ -1,4 +1,6 @@
 import struct
+
+
 class OptionHeader:
     magic_types = {
         0x010B: "PE32",
@@ -133,6 +135,7 @@ class OptionHeader:
         Loader Flags: 0x{self.loader_flags:08X}
         Number of RVA and Sizes: {self.number_of_rva_and_sizes}"""
 
+
 class OptionHeader32(OptionHeader):
     def __init__(self, base_of_data, *args):
         self.base_of_data = base_of_data
@@ -147,6 +150,7 @@ class OptionHeader32(OptionHeader):
     def __str__(self):
         return f"""{super().__str__()}
     Base of Data: 0x{self.base_of_data:08X}"""
+
 
 class OptionHeader64(OptionHeader):
     def __init__(self, *args):
