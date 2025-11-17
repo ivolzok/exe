@@ -71,7 +71,7 @@ class OptionHeader32(OptionHeader):
     def from_bytes(cls, data):
         fields = list(struct.unpack('<BBIIIIIIIIIHHHHHHIIIIHHIIIIII', data))
         base_of_data = fields.pop(7)
-        return OptionHeader32(267,base_of_data, *fields)
+        return OptionHeader32(base_of_data, 267, *fields)
 
 class OptionHeader64(OptionHeader):
     def __init__(self, *args):

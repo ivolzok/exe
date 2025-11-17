@@ -13,8 +13,6 @@ class DataDirectory:
 
     @classmethod
     def from_bytes(cls, data):
-        if len(data) % 8 != 0:
-            raise ValueError("данные должны делиться на 8")
         directory = DataDirectory()
         for i in range(0, len(data), 8):
             virtual_address, size = struct.unpack('<II', data[i:i+8])
