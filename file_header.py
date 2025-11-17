@@ -20,7 +20,7 @@ class FileHeader:
         self.characteristics = characteristics
 
     @classmethod
-    def from_bytes(cls, header):
-        fields = struct.unpack('<HHIIIHH', header[:20])
+    def from_bytes(cls, data):
+        fields = struct.unpack('<HHIIIHH', data)
         return cls(*fields)
 
