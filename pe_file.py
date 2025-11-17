@@ -7,7 +7,7 @@ from section import Section
 
 class PEFile:
     def __init__(self, signature, file_header: FileHeader,
-                 option_header: OptionHeader, data_directory: DataDirectory, sections: list[Section]):
+                 option_header: OptionHeader, data_directory: DataDirectory, sections: dict[str,Section]):
         self.signature = signature
         self.file_header = file_header
         self.option_header = option_header
@@ -34,9 +34,10 @@ class PEFile:
         data_directories_number = optional_header.number_of_rva_and_sizes
         data_directory = DataDirectory.from_bytes(file.read(8 * data_directories_number))
 
-        sections = []
+        sections = {}
         sections_num = file_header.number_of_sections
         for i in range(sections_num):
-            sections.append(Section.from_bytes(file.read(40)))
+            section = Section.from_bytes(file.read(40))
+            sections[section.name.decode().rstrip('\x00')] = section
 
         return PEFile(signature, file_header, optional_header, data_directory, sections)

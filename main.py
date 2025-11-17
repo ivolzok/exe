@@ -3,7 +3,9 @@ from pe_file import PEFile
 def main():
     #args = get_args()
     #path = args.path
-    with open("D:\mongodb-compass.exe", 'rb') as file:
+    a = "D:\mongodb-compass.exe"
+    b = "D:\DungerousDungeons\FIIT_C#_game.exe"
+    with open(a, 'rb') as file:
         pe_file = PEFile.from_file(file)
         print('cbbbb')
 
