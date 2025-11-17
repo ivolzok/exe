@@ -16,7 +16,6 @@ class PEFile:
 
     @classmethod
     def from_file(cls, file):
-        # переходим к основной части файла
         file.seek(0x3C)
         e_lfanew = struct.unpack('<I', file.read(4))[0]
         file.seek(e_lfanew)
