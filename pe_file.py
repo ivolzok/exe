@@ -45,4 +45,5 @@ class PEFile:
     def __str__(self):
         parts = []
         parts.append(str(self.file_header))
+        parts.append(str(self.option_header))
         return '\n\n'.join(parts)

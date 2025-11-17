@@ -48,7 +48,6 @@ class FileHeader:
         self.number_of_symbols = number_of_symbols
         self.size_of_optional_header = size_of_optional_header
         self.characteristics = characteristics
-        self.characteristics_list = self.get_characteristics_list()
 
     @classmethod
     def from_bytes(cls, data):
@@ -63,7 +62,7 @@ class FileHeader:
         return characteristics
 
     def __str__(self):
-        characteristics_str = ', '.join(self.characteristics_list)
+        characteristics_str = ', '.join(self.get_characteristics_list())
         machine_str = self.characteristics_dict.get(self.machine)
         time = datetime.fromtimestamp(self.time_date_stamp).strftime('%Y-%m-%d %H:%M:%S')
 

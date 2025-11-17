@@ -5,7 +5,7 @@ def main():
     #path = args.path
     a = "D:\mongodb-compass.exe"
     b = "D:\DungerousDungeons\FIIT_C#_game.exe"
-    with open(b, 'rb') as file:
+    with open(a, 'rb') as file:
         pe_file = PEFile.from_file(file)
         print(pe_file)
 
