@@ -41,3 +41,8 @@ class PEFile:
             sections[section.name.decode().rstrip('\x00')] = section
 
         return PEFile(signature, file_header, optional_header, data_directory, sections)
+
+    def __str__(self):
+        parts = []
+        parts.append(str(self.file_header))
+        return '\n\n'.join(parts)
