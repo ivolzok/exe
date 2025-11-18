@@ -39,13 +39,13 @@ class Section:
         0x80000000: "MEM_WRITE"
     }
 
-    def __init__(self, name, virtual_size, virtual_address, size_of_row_data,
+    def __init__(self, name, virtual_size, virtual_address, size_of_raw_data,
                  pointer_to_raw_data, pointer_to_relocations, pointer_to_line_numbers,
                  number_of_relocations, number_of_line_numbers, characteristics):
         self.name = name
         self.virtual_size = virtual_size
         self.virtual_address = virtual_address
-        self.size_of_row_data = size_of_row_data
+        self.size_of_raw_data = size_of_raw_data
         self.pointer_to_raw_data = pointer_to_raw_data
         self.pointer_to_relocations = pointer_to_relocations
         self.pointer_to_line_numbers = pointer_to_line_numbers
@@ -70,7 +70,7 @@ class Section:
         return f"""Section: {self.name.decode().rstrip('\x00')}
           Virtual Size:          0x{self.virtual_size:08X} ({self.virtual_size})
           Virtual Address:       0x{self.virtual_address:08X}
-          Raw Data Size:         0x{self.size_of_row_data:08X} ({self.size_of_row_data})
+          Raw Data Size:         0x{self.size_of_raw_data:08X} ({self.size_of_raw_data})
           Raw Data Pointer:      0x{self.pointer_to_raw_data:08X}
           Relocations Pointer:   0x{self.pointer_to_relocations:08X}
           Line Numbers Pointer:  0x{self.pointer_to_line_numbers:08X}
