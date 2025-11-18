@@ -55,6 +55,7 @@ class PEFile:
                             break
                         import_data = ImportData.from_bytes(import_data)
                         import_data.add_string_name(offset + import_data.name, file)
+                        import_data.add_thunks(offset, file, optional_header.magic)
                         imports.append(import_data)
                     break
 
