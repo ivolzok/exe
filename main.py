@@ -3,9 +3,9 @@ from pe_file import PEFile
 
 
 def main():
-    #args = get_args()
-    #path = args.path
-    with open("D:\DungerousDungeons\FIIT_C#_game.exe", 'rb') as file:
+    args = get_args()
+    path = args.path
+    with open(path, 'rb') as file:
         pe_file = PEFile.from_file(file)
         print(pe_file)
 

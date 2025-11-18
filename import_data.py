@@ -26,3 +26,11 @@ class ImportData:
             name += byte
         file.seek(start_pointer)
         self.string_name = name.decode()
+
+    def __str__(self):
+        return f"""Import DLL:
+    DLL Name:          {self.string_name}
+    Original First Thunk:  0x{self.original_first_thunk:08X}
+    Time Date Stamp:       0x{self.time_date_stamp:08X}
+    Forwarder Chain:       0x{self.forwarder_chain:08X}
+    First Thunk:           0x{self.first_thunk:08X}"""

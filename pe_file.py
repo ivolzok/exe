@@ -9,13 +9,13 @@ from import_data import ImportData
 class PEFile:
     def __init__(self, signature, file_header: FileHeader,
                  option_header: OptionHeader, data_directory: DataDirectory,
-                 sections: dict[str, Section], import_table: list[ImportData]):
+                 sections: dict[str, Section], imports: list[ImportData]):
         self.signature = signature
         self.file_header = file_header
         self.option_header = option_header
         self.data_directory = data_directory
         self.sections = sections
-        self.import_table = import_table
+        self.imports = imports
 
     @classmethod
     def from_file(cls, file):
@@ -42,7 +42,7 @@ class PEFile:
             section = Section.from_bytes(file.read(40))
             sections[section.name.decode().rstrip('\x00')] = section
 
-        import_table = []
+        imports = []
         if len(data_directory.table) >= 2:
             import_rva = data_directory[1][0]
             for section in sections.values():
@@ -55,13 +55,15 @@ class PEFile:
                             break
                         import_data = ImportData.from_bytes(import_data)
                         import_data.add_string_name(offset + import_data.name, file)
-                        import_table.append(import_data)
+                        imports.append(import_data)
                     break
 
-        return PEFile(signature, file_header, optional_header, data_directory, sections, import_table)
+        return PEFile(signature, file_header, optional_header, data_directory, sections, imports)
 
     def __str__(self):
         parts = [str(self.file_header), str(self.option_header), str(self.data_directory)]
         for section in self.sections.values():
             parts.append(str(section))
+        for dll in self.imports:
+            parts.append(str(dll))
         return '\n\n'.join(parts)
