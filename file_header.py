@@ -4,14 +4,40 @@ from datetime import datetime
 
 class FileHeader:
     machine_types_dict = {
-        0x014C: "IMAGE_FILE_MACHINE_I386 (Intel 386)",
-        0x8664: "IMAGE_FILE_MACHINE_AMD64 (x64)",
-        0x01C0: "IMAGE_FILE_MACHINE_ARM (ARM LE)",
-        0xAA64: "IMAGE_FILE_MACHINE_ARM64 (ARM64 LE)",
-        0x014D: "IMAGE_FILE_MACHINE_I486 (Intel 486)",
-        0x014E: "IMAGE_FILE_MACHINE_PENTIUM (Intel Pentium)",
-        0x0200: "IMAGE_FILE_MACHINE_IA64 (Intel Itanium)",
-        0x0EBC: "IMAGE_FILE_MACHINE_EBC (EFI Byte Code)",
+        0x0: "Applicable to any machine type",
+        0x184: "Alpha AXP, 32-bit address space",
+        0x284: "Alpha 64, 64-bit address space",
+        0x1D3: "Matsushita AM33",
+        0x8664: "x64",
+        0x1C0: "ARM little endian",
+        0xAA64: "ARM64 little endian",
+        0xA641: "ARM64EC — ABI for interoperability between ARM64 and emulated x64",
+        0xA64E: "ARM64X — mixed ARM64 and ARM64EC code",
+        0x1C4: "ARM Thumb-2 little endian",
+        0xEBC: "EFI byte code",
+        0x14C: "Intel 386 or later (x86)",
+        0x200: "Intel Itanium (IA-64)",
+        0x6232: "LoongArch 32-bit processor family",
+        0x6264: "LoongArch 64-bit processor family",
+        0x9041: "Mitsubishi M32R little endian",
+        0x266: "MIPS16",
+        0x366: "MIPS with FPU",
+        0x466: "MIPS16 with FPU",
+        0x1F0: "PowerPC little endian",
+        0x1F1: "PowerPC with floating point support",
+        0x160: "MIPS I compatible 32-bit big endian",
+        0x162: "MIPS I compatible 32-bit little endian",
+        0x166: "MIPS III compatible 64-bit little endian",
+        0x168: "MIPS IV compatible 64-bit little endian",
+        0x5032: "RISC-V 32-bit address space",
+        0x5064: "RISC-V 64-bit address space",
+        0x5128: "RISC-V 128-bit address space",
+        0x1A2: "Hitachi SH3",
+        0x1A3: "Hitachi SH3 DSP",
+        0x1A6: "Hitachi SH4",
+        0x1A8: "Hitachi SH5",
+        0x1C2: "Thumb",
+        0x169: "MIPS little-endian WCE v2",
     }
 
     characteristics_dict = {
@@ -63,7 +89,7 @@ class FileHeader:
 
     def __str__(self):
         characteristics_str = ', '.join(self.get_characteristics_list())
-        machine_str = self.characteristics_dict.get(self.machine)
+        machine_str = self.machine_types_dict.get(self.machine)
         time = datetime.fromtimestamp(self.time_date_stamp).strftime('%Y-%m-%d %H:%M:%S')
 
         return f"""File Header:
