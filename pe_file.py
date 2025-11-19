@@ -3,13 +3,13 @@ from file_header import FileHeader
 from option_header import OptionHeader, OptionHeader32, OptionHeader64
 from data_directory import DataDirectory
 from section import Section
-from import_data import ImportData
+from import_table import ImportTable
 
 
 class PEFile:
     def __init__(self, signature, file_header: FileHeader,
                  option_header: OptionHeader, data_directory: DataDirectory,
-                 sections: dict[str, Section], imports: list[ImportData]):
+                 sections: dict[str, Section], imports: list[ImportTable]):
         self.signature = signature
         self.file_header = file_header
         self.option_header = option_header
@@ -53,7 +53,7 @@ class PEFile:
                         import_data = file.read(20)
                         if import_data == b'\x00' * 20:
                             break
-                        import_data = ImportData.from_bytes(import_data)
+                        import_data = ImportTable.from_bytes(import_data)
                         import_data.add_string_name(offset + import_data.name, file)
                         import_data.add_thunks(offset, file, optional_header.magic)
                         imports.append(import_data)

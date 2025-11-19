@@ -2,7 +2,7 @@ import struct
 from thunk_data import ThunkDataName, ThunkDataOrdinal
 
 
-class ImportData:
+class ImportTable:
     def __init__(self, original_first_thunk, time_date_stamp, forwarder_chain, name, first_thunk):
         self.original_first_thunk = original_first_thunk
         self.time_date_stamp = time_date_stamp
@@ -15,7 +15,7 @@ class ImportData:
     @classmethod
     def from_bytes(cls, data):
         fields = struct.unpack('<IIIII', data)
-        return ImportData(*fields)
+        return ImportTable(*fields)
 
     def add_string_name(self, pointer, file):
         start_pointer = file.tell()
