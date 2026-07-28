@@ -13,11 +13,11 @@
 ### Базовый анализ
 
 ```bash
-python pe_parser.py ./program.exe
+python main.py ./program.exe
 ```
 
 ### Анализ файла по абсолютному пути
 
 ```bash
-python pe_parser.py "C:\Windows\System32\notepad.exe"
+python main.py "C:\Windows\System32\notepad.exe"
 ```
